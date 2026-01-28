@@ -31,8 +31,6 @@
       background: #fff;
     }
     #pdfCanvas {
-      max-width: 100%;
-      max-height: 100%;
       display: block;
     }
     #controls {
@@ -138,12 +136,18 @@
         
         var scaleX = containerWidth / originalViewport.width;
         var scaleY = containerHeight / originalViewport.height;
-        var scale = Math.min(scaleX, scaleY);
+        var baseScale = Math.min(scaleX, scaleY);
+
+        var pixelRatio = Math.max(window.devicePixelRatio || 1, 2);
+        var scale = baseScale * pixelRatio;
 
         var viewport = page.getViewport({ scale: scale });
 
         canvas.width = viewport.width;
         canvas.height = viewport.height;
+
+        canvas.style.width = (viewport.width / pixelRatio) + "px";
+        canvas.style.height = (viewport.height / pixelRatio) + "px";
 
         page.render({
           canvasContext: ctx,
