@@ -25,13 +25,15 @@
     #canvasContainer {
       flex: 1;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       overflow: hidden;
       background: #fff;
+      padding: 10px;
     }
     #pdfCanvas {
       display: block;
+      max-width: 100%;
     }
     #controls {
       display: flex;
@@ -129,14 +131,12 @@
       rendering = true;
 
       pdfDoc.getPage(num).then(function(page) {
-        var containerWidth = canvasContainer.clientWidth;
-        var containerHeight = canvasContainer.clientHeight;
+        var containerWidth = canvasContainer.clientWidth - 20;
 
         var originalViewport = page.getViewport({ scale: 1 });
         
-        var scaleX = containerWidth / originalViewport.width;
-        var scaleY = containerHeight / originalViewport.height;
-        var baseScale = Math.min(scaleX, scaleY);
+        // 가로 폭에만 맞추기 (세로 여백 제거)
+        var baseScale = containerWidth / originalViewport.width;
 
         var pixelRatio = Math.max(window.devicePixelRatio || 1, 2);
         var scale = baseScale * pixelRatio;
