@@ -40,7 +40,9 @@
     }
     #controls {
       display: flex;
+      flex-direction: row;
       align-items: center;
+      justify-content: center;
       padding: 16px;
       background: #fff;
       border-top: 1px solid #eee;
@@ -73,6 +75,8 @@
     }
     #progressWrapper {
       flex: 1;
+      max-width: 600px;
+      height: 40px;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -95,6 +99,9 @@
       font-size: 13px;
       color: #666;
       white-space: nowrap;
+      min-width: 50px;
+      text-align: center;
+      line-height: 40px;
     }
     #loading, #error {
       position: absolute;
