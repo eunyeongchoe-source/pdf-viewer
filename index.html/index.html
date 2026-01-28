@@ -30,6 +30,11 @@
       background: #fff;
       overflow: hidden;
     }
+    @media (max-width: 767px) {
+      #canvasContainer {
+        align-items: flex-start;
+      }
+    }
     #pdfCanvas {
       display: block;
     }
@@ -142,6 +147,10 @@
     var pageNum = 1;
     var rendering = false;
 
+    function isMobile() {
+      return window.innerWidth <= 767;
+    }
+
     function showError(msg) {
       loading.style.display = "none";
       errorDiv.style.display = "block";
@@ -164,9 +173,16 @@
 
         var originalViewport = page.getViewport({ scale: 1 });
         
-        var scaleX = containerWidth / originalViewport.width;
-        var scaleY = containerHeight / originalViewport.height;
-        var baseScale = Math.min(scaleX, scaleY);
+        var baseScale;
+        if (isMobile()) {
+          // 모바일: 가로폭에 꽉 맞춤
+          baseScale = containerWidth / originalViewport.width;
+        } else {
+          // 데스크톱: 컨테이너에 fit
+          var scaleX = containerWidth / originalViewport.width;
+          var scaleY = containerHeight / originalViewport.height;
+          baseScale = Math.min(scaleX, scaleY);
+        }
 
         var pixelRatio = Math.max(window.devicePixelRatio || 1, 2);
         var scale = baseScale * pixelRatio;
