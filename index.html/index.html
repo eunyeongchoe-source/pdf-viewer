@@ -88,6 +88,15 @@
       height: 20px;
       fill: #333;
     }
+    #downloadBtn {
+      background: #2563eb;
+    }
+    #downloadBtn:hover {
+      background: #1d4ed8;
+    }
+    #downloadBtn svg {
+      fill: #fff;
+    }
     #pageInfo {
       font-family: system-ui, -apple-system, sans-serif;
       font-size: 13px;
@@ -126,17 +135,21 @@
         <button class="nav-btn" id="nextBtn" aria-label="Next">
           <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
         </button>
+        <button class="nav-btn" id="downloadBtn" aria-label="Download">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        </button>
       </div>
     </div>
   </div>
 
   <script>
-    var PDF_URL = "./deck.pdf";
+    var PDF_URL = "./deck.pdf?v=2";
     
     var canvas = document.getElementById("pdfCanvas");
     var ctx = canvas.getContext("2d");
     var prevBtn = document.getElementById("prevBtn");
     var nextBtn = document.getElementById("nextBtn");
+    var downloadBtn = document.getElementById("downloadBtn");
     var pageInfo = document.getElementById("pageInfo");
     var progressFill = document.getElementById("progressFill");
     var loading = document.getElementById("loading");
@@ -217,6 +230,13 @@
 
     nextBtn.addEventListener("click", function() {
       if (pdfDoc && pageNum < pdfDoc.numPages) renderPage(pageNum + 1);
+    });
+
+    downloadBtn.addEventListener("click", function() {
+      var link = document.createElement("a");
+      link.href = "./deck.pdf";
+      link.download = "NVA_Solution_Deck.pdf";
+      link.click();
     });
 
     document.addEventListener("keydown", function(e) {
