@@ -88,15 +88,6 @@
       height: 20px;
       fill: #333;
     }
-    #downloadBtn {
-      background: #2563eb;
-    }
-    #downloadBtn:hover {
-      background: #1d4ed8;
-    }
-    #downloadBtn svg {
-      fill: #fff;
-    }
     #pageInfo {
       font-family: system-ui, -apple-system, sans-serif;
       font-size: 13px;
@@ -104,6 +95,29 @@
       white-space: nowrap;
       min-width: 60px;
       text-align: center;
+    }
+    #downloadWrapper {
+      display: flex;
+      justify-content: center;
+      padding: 0 16px 16px;
+      background: #fff;
+    }
+    #downloadBtn {
+      display: inline-block;
+      padding: 10px 24px;
+      background: #2563eb;
+      color: #fff;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    #downloadBtn:hover {
+      background: #1d4ed8;
     }
     #loading, #error {
       position: absolute;
@@ -135,9 +149,9 @@
         <button class="nav-btn" id="nextBtn" aria-label="Next">
           <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
         </button>
-        <button class="nav-btn" id="downloadBtn" aria-label="Download">
-          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-        </button>
+      </div>
+      <div id="downloadWrapper">
+        <button id="downloadBtn">Download</button>
       </div>
     </div>
   </div>
